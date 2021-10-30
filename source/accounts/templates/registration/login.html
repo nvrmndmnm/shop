@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sign in{% endblock %}
+{% block content %}
+    <div class="w-25 mx-auto mt-4 bg-light p-5">
+        <h4>Sign in</h4>
+        <form action="{% url 'accounts:login' %}?next={{ next }}" method="post" class="text-center mt-4">
+            {% csrf_token %}
+            <div class="d-flex justify-content-between flex-wrap mb-3">
+                <label for="username" class="form-label me-3">Username:</label>
+                <input type="text" name="username" id="username">
+            </div>
+            <div class="d-flex justify-content-between flex-wrap mb-3">
+                <label for="password" class="form-label me-3">Password:</label>
+                <input type="password" name="password" id="password">
+            </div>
+            {% if form.errors %}
+                <p class="form-error">Incorrect username or password.</p>
+            {% endif %}
+            <div class="form-buttons d-flex justify-content-end">
+                <button class="btn btn-main me-3" type="submit">Login</button>
+                <a class="btn btn" href="{{request.META.HTTP_REFERER}}">Back</a>
+            </div>
+        </form>
+        <div class="d-flex justify-content-center border border rounded p-2 mt-4">
+            <a class="mx-auto" href="{% url 'accounts:register' %}">Sign up</a>
+        </div>
+    </div>
+{% endblock %}

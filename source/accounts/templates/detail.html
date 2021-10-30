@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Sign up{% endblock %}
+{% block content %}
+    <div class="w-25 mx-auto mt-4">
+        <h2>Profile</h2>
+        <hr>
+        <p>{{ user_obj.phone_number }}</p>
+    <a href="{% url 'accounts:update' %}">Update</a>
+    <a href="{% url 'accounts:update_password' %}">Update password</a>
+    </div>
+{% endblock %}

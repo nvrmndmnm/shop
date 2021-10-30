@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sign in{% endblock %}
+{% block content %}
+    <div class="w-25 mx-auto mt-4">
+        <h2>Update Profile</h2>
+        <hr>
+        <form action="{% url 'accounts:update' %}?next={{ next }}"
+              method="post" class="text-center" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            {% include 'partial/form.html' with button_text='Update' %}
+        </form>
+    </div>
+{% endblock %}
