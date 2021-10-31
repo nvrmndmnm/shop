@@ -19,31 +19,30 @@
     <div class="container">
         <a class="navbar-brand mr-5 header-logo" href="{% url 'storefront:index' %}">Delight Mart</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
             <ul class="navbar-nav w-100 justify-content-between align-items-center">
                 <li class="nav-item dropdown active">
-                    <a class="btn btn-main px-4"
-                       href="#" id="navbarScrollingDropdown"
-                       role="button" data-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-main dropdown-toggle px-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-bars"></i> Catalog
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                        {% for category, caption in choices %}
-                            <li><a class="dropdown-item" href="/c/{{ category }}">{{ caption }}</a></li>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        {% for category in categories_list %}
+                            <li><a class="dropdown-item" href="/c/{{ category.pk }}">{{ category.title }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
                 <li class="nav-item">
-                    {% include 'partial/search_form.html' %}
-{#                    <form class="form-inline" action="">#}
-{#                        <div class="input-group">#}
-{#                            <input class="form-control py-2 border-right-0 border" type="search" placeholder="Search" id="search-input">#}
-{#                            <span class="input-group-append">#}
-{#              <button class="btn btn-search border-left-0 border nav-link" type="button">#}
-{#                    <i class="fa fa-search"></i>#}
-{#              </button>#}
-{#            </span>#}
-{#                        </div>#}
-{#                    </form>#}
+                    {% include 'partial/search_form.html' with home=True %}
+                    {#                    <form class="form-inline" action="">#}
+                    {#                        <div class="input-group">#}
+                    {#                            <input class="form-control py-2 border-right-0 border" type="search" placeholder="Search" id="search-input">#}
+                    {#                            <span class="input-group-append">#}
+                    {#              <button class="btn btn-search border-left-0 border nav-link" type="button">#}
+                    {#                    <i class="fa fa-search"></i>#}
+                    {#              </button>#}
+                    {#            </span>#}
+                    {#                        </div>#}
+                    {#                    </form>#}
                 </li>
                 <li class="nav-item">
                     <div class="d-flex">

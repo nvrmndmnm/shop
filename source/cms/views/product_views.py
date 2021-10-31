@@ -155,14 +155,19 @@ class CategoryListView(ListView):
     paginate_by = 10
     ordering = ['title']
 
-    def get_queryset(self):
-        return super().get_queryset().exclude(parent_cat__isnull=True)
-
 
 class CategoryCreateView(CreateView):
     model = Category
     form_class = CategoryForm
     template_name = 'inventory/category/create.html'
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        category = form.save()
+        if category.parent_cat:
+            category.parent_cat.is_parent = True
+            category.parent_cat.save()
+        return response
 
     def get_success_url(self):
         return reverse_lazy('cms:categories')
