@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Category{% endblock %}
+{% block content %}
+    <div class="container pt-4">
+        <div class="content">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'storefront:index' %}">Shop</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'storefront:category' product_list.first.category.pk %}">
+                            {{ product_list.first.category.title }}</a>
+                    </li>
+                </ol>
+            </nav>
+            <div class="row px-4">
+                {% for product in product_list %}
+                    <div class="col-md-3 h-100 mb-3" style="float:left">
+                        <div class="card mb-2 product-card" onclick="location.href='{% url "storefront:product" product.pk %}';">
+                            <img class="card-img-top product-img-preview"
+                                 src="{{ product.image_container.images.first.file.url }}" alt="{{ product.title }}">
+                            <div class="card-body">
+                                <p class="product-title text-center">{{ product.title }}</p>
+                                <div class="d-flex align-items-center">
+                                    <h5 class="product-price w-50">{{ product.stock.price }}</h5>
+                                    <a class="nav-link w-25" href="ppp"><i class="fa fa-shopping-cart fa-2x"></i></a>
+                                    <a class="nav-link w-25" href="ooo"><i class="fa fa-heart fa-2x"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
