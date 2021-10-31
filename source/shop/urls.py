@@ -8,4 +8,4 @@ urlpatterns = [
     path('', include('storefront.urls')),
     path('accounts/', include('accounts.urls')),
     path('cms/', include('cms.urls'))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
