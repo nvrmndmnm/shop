@@ -1,0 +1,46 @@
+{% extends 'cms_base.html' %}
+{% block title %}Categories - CMS{% endblock %}
+{% block content %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'cms:products' %}">Products</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'cms:categories' %}">Categories</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'cms:brands' %}">Brands</a>
+        </li>
+    </ul>
+    <div class="d-flex justify-content-between mt-4 mb-2">
+        <a class="btn btn-warning btn-sm h-50" href="{% url 'cms:category_create' %}">Add category</a>
+        {% include "partial/search_form.html" %}
+    </div>
+    {% if category_list %}
+        <table class="table table-hover">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col" style="width: 45%">Title</th>
+                <th scope="col" style="width: 20%">Parent Category</th>
+                <th scope="col" style="width: 5%">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in category_list %}
+                <tr>
+                    <th scope="row"><a href="{% url 'cms:category_update' category.pk %}">{{ category.title }}</a></th>
+                    <td>{{ category.parent_cat.title }}</td>
+                    <td>
+                        <a href="#"><i class="fa fa-pencil"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% if is_paginated %}
+            {% include "partial/pagination.html" %}
+        {% endif %}
+    {% else %}
+        <p>No categories found.</p>
+    {% endif %}
+{% endblock %}

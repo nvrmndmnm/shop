@@ -1,0 +1,10 @@
+{% extends 'cms_base.html' %}
+{% block title %}Upload prices{% endblock %}
+{% block content %}
+    <div class="w-50 mx-auto mt-4">
+        <form action="{% url 'cms:price_upload' %}?next={{ next }}"
+              method="post" class="text-center" enctype="multipart/form-data" novalidate>
+            {% include 'partial/form.html' with button_text='Upload' %}
+        </form>
+    </div>
+{% endblock %}

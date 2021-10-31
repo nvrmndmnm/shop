@@ -1,0 +1,13 @@
+{% extends 'cms_base.html' %}
+{% block title %}Product {{ product.title }} - CMS{% endblock %}
+{% block content %}
+    <div class="w-50 mx-auto mt-4">
+        <form action="{% url 'cms:product_update' product.pk %}?next={{ next }}"
+              method="post" class="text-center" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            {% include 'partial/form.html' with button_text='Update' %}
+            {{ image_container_form.as_p }}
+            {{ image_form.as_p }}
+        </form>
+    </div>
+{% endblock %}
