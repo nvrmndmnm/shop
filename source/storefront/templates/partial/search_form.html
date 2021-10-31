@@ -2,7 +2,7 @@
     <div class="input-group">
         <input class="form-control border" type="search" name="q" placeholder="Search">
         <span class="input-group-append">
-                    <button class="btn btn-search bg-white border-0" type="submit">
+                    <button class="btn btn-search bg-white {% if home %}border border-start-0{% else %}border-0{% endif %}" type="submit">
                         <i class="fa fa-search"></i>
                     </button>
                 </span>

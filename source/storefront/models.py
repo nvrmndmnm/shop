@@ -33,6 +33,7 @@ class Category(BaseModel):
     title = models.CharField(max_length=255, verbose_name='Category title')
     parent_cat = models.ForeignKey('self', on_delete=models.RESTRICT, null=True, blank=True,
                                    verbose_name='Parent category', related_name='parent_category')
+    is_parent = models.BooleanField(default=False, null=True, blank=True)
 
     def __str__(self):
         return f"{self.title}"
