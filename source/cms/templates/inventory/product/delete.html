@@ -1,0 +1,15 @@
+{% extends 'cms_base.html' %}
+{% block title %}Delete product - CMS{% endblock %}
+{% block content %}
+    <div class="w-50 mx-auto mt-4">
+        <h4 class="text-center">Are you sure want to remove product '{{ product.title }}'?</h4>
+        <hr class="mb-4">
+        <form action="{% url 'cms:product_delete' product.pk %}" method="post">
+            {% csrf_token %}
+            <div class="form-buttons d-flex justify-content-center">
+                <button class="btn btn-warning me-3" type="submit">Yes</button>
+                <a class="btn btn-dark" href="{% url 'cms:products' %}">No</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
