@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Product{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="content px-3 py-4 mt-4">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'storefront:index' %}">Shop</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'storefront:category' product.category.id %}">{{ product.category.title }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
+                </ol>
+            </nav>
+            <div class="row ml-2 my-4"><h1>{{ product.title }}</h1></div>
+            <div class="row">
+                <div class="col-md-12 d-flex">
+                    <div class="col-md-6">
+                        <div class="pro-img-details">
+                            <img src="{{ product.image_container.images.first.file.url }}" alt="{{ product.title }}">
+                        </div>
+                        <div class="pro-img-list">
+                            {% for image in product.image_container.images.all %}
+                            <a href="#">
+                                <img src="{{ image.file.url }}" alt="{{ image }}">
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <p> {{ product.description|linebreaksbr }}
+                        </p>
+                        <hr>
+                        <div class="m-bot15"> <strong>Price : </strong> <span class="pro-price"> ${{ product.stock.price }} {{ product.stock.discount_price }}</span></div>
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="number" placeholder="1" class="form-control quantity">
+                        </div>
+                        <p>
+                            <button class="btn btn-round btn-main" type="button">
+                                <i class="fa fa-shopping-cart"></i> Add to Cart
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
