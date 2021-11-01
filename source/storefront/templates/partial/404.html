@@ -1,0 +1,8 @@
+{% load static %}
+<div class="content d-flex justify-content-center">
+    <div class="d-flex flex-column align-items-center m-5">
+        <img src="{% static 'img/404.png' %}" alt="404">
+        <h4 class="m-5">No products found matching your query.</h4>
+        <a href="{% url 'storefront:index' %}">Go to homepage</a>
+    </div>
+</div>

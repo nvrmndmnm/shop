@@ -26,7 +26,7 @@ class ProductSearchView(ListView):
         return context
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().exclude(stock__isnull=True).filter(stock__quantity__gt=0)
         if self.search_value:
             query = self.get_query()
             queryset = queryset.filter(query)
@@ -46,7 +46,7 @@ class ProductSearchView(ListView):
 
 class IndexView(ProductSearchView):
     template_name = 'index.html'
-    paginate_by = 5
+    paginate_by = 12
 
 
 class ProductListView(ProductSearchView):
@@ -62,3 +62,22 @@ class ProductListView(ProductSearchView):
 class ProductDetailView(DetailView):
     template_name = 'product_detail.html'
     model = Product
+
+    def get_queryset(self):
+        queryset = super().get_queryset().exclude(stock__isnull=True).exclude(image_container__isnull=True)
+        return queryset
+
+
+class DeliveryPageView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'info_pages/delivery.html')
+
+
+class BenefitsPageView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'info_pages/benefits.html')
+
+
+class ReturnPolicyPageView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'info_pages/return_policy.html')

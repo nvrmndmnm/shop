@@ -143,9 +143,13 @@ class PriceCreateView(CreateView):
 def update_stocks(csv_upload):
     file = csv_upload.read().decode('utf-8')
     csv_data = csv.reader(StringIO(file), delimiter=',')
+
     for row in csv_data:
-        product = get_object_or_404(Product, sku=row[0])
-        product.stock = Stock.objects.create(price=row[1], quantity=row[2], discount_price=row[3])
+        row_dict = dict((x, y) for x, y in enumerate(row))
+        product = get_object_or_404(Product, sku=row_dict.get(0))
+        product.stock = Stock.objects.create(price=row_dict.get(1),
+                                             quantity=row_dict.get(2),
+                                             discount_price=row_dict.get(3, None))
         product.save()
 
 
