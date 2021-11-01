@@ -141,7 +141,7 @@
                                                     <span class="text-muted">${{ product.stock.price }}</span>
                                                 {% endif %}
                                             </h5>
-                                            <a class="nav-link w-25" href="ppp"><i class="fa fa-shopping-cart fa-2x"></i></a>
+                                            <a class="nav-link w-25" href="{% url 'cart:add_to_cart' %}"><i class="fa fa-shopping-cart fa-2x"></i></a>
                                             <a class="nav-link w-25" href="ooo"><i class="fa fa-heart fa-2x"></i></a>
                                         </div>
                                     </div>

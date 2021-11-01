@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'storefront',
     'accounts',
     'cms',
+    'cart',
     'django_sass'
 ]
 
