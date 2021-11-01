@@ -22,27 +22,18 @@
 
             <ul class="navbar-nav w-100 justify-content-between align-items-center">
                 <li class="nav-item dropdown active">
-                    <button class="btn btn-main dropdown-toggle px-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-main dropdown-toggle px-4" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-bars"></i> Catalog
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         {% for category in categories_list %}
-                            <li><a class="dropdown-item" href="/c/{{ category.pk }}">{{ category.title }}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'storefront:category' category.pk %}">{{ category.title }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
                 <li class="nav-item">
                     {% include 'partial/search_form.html' with home=True %}
-                    {#                    <form class="form-inline" action="">#}
-                    {#                        <div class="input-group">#}
-                    {#                            <input class="form-control py-2 border-right-0 border" type="search" placeholder="Search" id="search-input">#}
-                    {#                            <span class="input-group-append">#}
-                    {#              <button class="btn btn-search border-left-0 border nav-link" type="button">#}
-                    {#                    <i class="fa fa-search"></i>#}
-                    {#              </button>#}
-                    {#            </span>#}
-                    {#                        </div>#}
-                    {#                    </form>#}
                 </li>
                 <li class="nav-item">
                     <div class="d-flex">
@@ -67,6 +58,37 @@
     </div>
 </nav>
 {% block content %}{% endblock %}
+<footer class="site-footer mt-5">
+    <div class="container d-flex flex-nowrap justify-content-center pt-4">
+        <div class="w-25 mb-3">
+            <h5>Catalog</h5>
+            <ul class="list-unstyled">
+                {% for category in categories_list|slice:"5" %}
+                    <li><a class="text-muted text-decoration-none" href="{% url 'storefront:category' category.pk %}">{{ category.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="w-25 mb-3">
+            <h5>User center</h5>
+            <ul class="list-unstyled">
+                {% if user.is_authenticated %}
+                    <li><a class="text-muted text-decoration-none" href="{% url 'accounts:profile' user.pk %}">Profile</a></li>
+                {% else %}
+                    <li><a class="text-muted text-decoration-none" href="{% url 'accounts:login' %}">Login</a></li>
+                {% endif %}
+                <li><a class="text-muted text-decoration-none" href="{% url 'cms:cms' %}">CMS panel</a></li>
+            </ul>
+        </div>
+        <div class="mb-3">
+            <h5>Info</h5>
+            <ul class="list-unstyled">
+                <li><a class="text-muted text-decoration-none" href="{% url 'storefront:delivery' %}">Delivery</a></li>
+                <li><a class="text-muted text-decoration-none" href="{% url 'storefront:returns' %}">Returns</a></li>
+                <li><a class="text-muted text-decoration-none" href="{% url 'storefront:benefits' %}">Benefits</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
 <script src="{% static "js/jquery-3.6.0.min.js" %}"></script>
 <script src="{% static "js/bootstrap.min.js" %}"></script>
 </body>

@@ -4,35 +4,46 @@
 {% block content %}
     <div class="container pt-4">
         <div class="content">
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="{% url 'storefront:index' %}">Shop</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="{% url 'storefront:category' product_list.first.category.pk %}">
-                            {{ product_list.first.category.title }}</a>
-                    </li>
-                </ol>
-            </nav>
-            <div class="row px-4">
-                {% for product in product_list %}
-                    <div class="col-md-3 h-100 mb-3" style="float:left">
-                        <div class="card mb-2 product-card" onclick="location.href='{% url "storefront:product" product.pk %}';">
-                            <img class="card-img-top product-img-preview"
-                                 src="{{ product.image_container.images.first.file.url }}" alt="{{ product.title }}">
-                            <div class="card-body">
-                                <p class="product-title text-center">{{ product.title }}</p>
-                                <div class="d-flex align-items-center">
-                                    <h5 class="product-price w-50">{{ product.stock.price }}</h5>
-                                    <a class="nav-link w-25" href="ppp"><i class="fa fa-shopping-cart fa-2x"></i></a>
-                                    <a class="nav-link w-25" href="ooo"><i class="fa fa-heart fa-2x"></i></a>
+            {% if product_list %}
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb p-3">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'storefront:index' %}">Shop</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'storefront:category' product_list.first.category.pk %}">
+                                {{ product_list.first.category.title }}</a>
+                        </li>
+                    </ol>
+                </nav>
+                <div class="row px-4">
+                    {% for product in product_list %}
+                        <div class="col-md-3 h-100 mb-3" style="float:left">
+                            <div class="card mb-2 product-card" onclick="location.href='{% url "storefront:product" product.pk %}';">
+                                <img class="card-img-top product-img-preview pt-3"
+                                     src="{{ product.image_container.images.first.file.url }}" alt="{{ product.title }}">
+                                <div class="card-body">
+                                    <p class="product-title text-center">{{ product.title }}</p>
+                                    <div class="d-flex align-items-center">
+                                        <h5 class="pro-price w-50">
+                                            {% if product.stock.discount_price %}
+                                                <strike class="text-muted">${{ product.stock.price }}</strike>
+                                                <span class="discount">${{ product.stock.discount_price }}</span>
+                                            {% else %}
+                                                <span class="text-muted">${{ product.stock.price }}</span>
+                                            {% endif %}
+                                        </h5>
+                                        <a class="nav-link w-25" href="ppp"><i class="fa fa-shopping-cart fa-2x"></i></a>
+                                        <a class="nav-link w-25" href="ooo"><i class="fa fa-heart fa-2x"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {% include 'partial/404.html' %}
+            {% endif %}
         </div>
     </div>
 {% endblock %}

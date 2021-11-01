@@ -1,7 +1,8 @@
 /*Base and Index*/
 body {
-  background-color: #e5e5e5;
-  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    background-color: #e5e5e5;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    min-height: 100vh;
 }
 .btn:focus {
     border-color: inherit;
@@ -9,47 +10,52 @@ body {
     box-shadow: none;
 }
 .content {
-  background-color: #f9f9f9;
+    background-color: #f9f9f9;
 }
 .header-logo {
-  font-size: 30px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -2px;
+    font-size: 30px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -2px;
 }
 .nav-link {
-  color: #4C67E2;
+    color: #4C67E2;
 }
 .nav-link:hover {
-  color: #fa4b4b;
+    color: #fa4b4b;
 }
 .btn-main {
-  background-color: #4C67E2;
-  color: #fff;
-  border-radius: 8px;
+    background-color: #4C67E2;
+    color: #fff;
+    border-radius: 8px;
 }
 .btn-search {
-  background-color: #fff;
+    background-color: #fff;
 }
 .btn:hover {
     color: #fff;
     background-color: #fa4b4b;
 }
 .btn-search:hover {
-  background-color: #fff;
+    background-color: #fff;
 }
 .site-header {
-  background-color: rgba(255, 255, 255, .85);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
+    background-color: rgba(255, 255, 255, .85);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
 }
 .site-header a {
-  color: #4C67E2;
-  transition: ease-in-out color .15s;
+    color: #4C67E2;
+    transition: ease-in-out color .15s;
 }
 .site-header a:hover {
-  color: #fa4b4b;
-  text-decoration: none;
+    color: #fa4b4b;
+    text-decoration: none;
+}
+.site-footer {
+    background-color: rgba(255, 255, 255, .85);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
 }
 .main-slider {
     height: 20vh;
@@ -58,16 +64,16 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-  }
+}
 .carousel-multi-item {
 
-  }
+}
 .carousel-multi-item .carousel-indicators {
     bottom: -1.75rem;
 }
 .carousel-multi-item .carousel-indicators li {
-    height: 1.25rem;
-    width: 1.25rem;
+    height: 1rem;
+    width: 1rem;
     max-width: 1.25rem;
     border-radius: 50%;
     cursor: pointer;
@@ -111,36 +117,28 @@ body {
     text-overflow: ellipsis;
     margin-bottom: 0;
 }
-.product-price {
-    font-weight: bold;
+.breadcrumb {
+    background-color: #e9ecef;
 }
+
 /*Product page*/
-.pro-img-details {
-    margin-left: -15px;
-}
 .pro-img-details img {
     width: 100%;
 }
 .pro-price{
-    color:#fc5959 ;
-}
-
-.pro-price {
     font-size: 18px;
     padding: 0 10px;
+}
+.discount{
+    color:#fc5959;
 }
 .quantity {
     width: 120px;
 }
-
-.pro-img-list {
-    margin: 10px 0 0 -15px;
-    width: 100%;
-    display: inline-block;
+.img-gallery {
+    width: 20%;
 }
-
-.pro-img-list a {
-    float: left;
-    margin-right: 10px;
-    margin-bottom: 10px;
+.img-gallery:hover {
+    opacity: 0.8;
+    cursor: pointer;
 }
