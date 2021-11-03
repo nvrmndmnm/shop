@@ -8,4 +8,3 @@ class User(AbstractUser):
                                      message='Should be a valid phone number.'
                                      )
     phone_number = models.CharField(max_length=17, validators=[phone_validator], unique=True)
-

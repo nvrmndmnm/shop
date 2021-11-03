@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Sign in{% endblock %}
+{% block title %}Update profile{% endblock %}
 {% block content %}
-    <div class="w-25 mx-auto mt-4">
-        <h2>Update Profile</h2>
+    <div class="w-25 mx-auto mt-4 bg-light p-5">
+        <h2>Update profile</h2>
         <hr>
         <form action="{% url 'accounts:update' %}?next={{ next }}"
               method="post" class="text-center" enctype="multipart/form-data" novalidate>
