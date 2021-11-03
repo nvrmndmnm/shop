@@ -1,11 +1,82 @@
 {% extends 'base.html' %}
-{% block title %}Sign up{% endblock %}
+{% block title %}User profile{% endblock %}
 {% block content %}
-    <div class="w-25 mx-auto mt-4">
-        <h2>Profile</h2>
+    <div class="w-75 mx-auto mt-4 bg-light p-5">
+        <div class="d-flex justify-content-between">
+            <h2>Profile</h2>
+            <div class="d-flex flex-column">
+                <a href="{% url 'accounts:update' %}">Update profile</a>
+                <a href="{% url 'accounts:update_password' %}">Update password</a>
+            </div>
+        </div>
         <hr>
-        <p>{{ user_obj.phone_number }}</p>
-    <a href="{% url 'accounts:update' %}">Update</a>
-    <a href="{% url 'accounts:update_password' %}">Update password</a>
+        <div class="row g-5">
+            <div class="col col-4">
+                <div class="p-3 border bg-light">
+                    <h5 class="fw-bold">Personal info</h5>
+                    <div class="row py-1">
+                        <div class="col">
+                            <label>First name:</label>
+                        </div>
+                        <div class="col">
+                            {{ user_obj.first_name }}
+                        </div>
+                    </div>
+                    <div class="row py-1">
+                        <div class="col">
+                            <label>First name:</label>
+                        </div>
+                        <div class="col">
+                            {{ user_obj.last_name }}
+                        </div>
+                    </div>
+                    <div class="row py-1">
+                        <div class="col">
+                            <label>Email:</label>
+                        </div>
+                        <div class="col">
+                            {{ user_obj.email }}
+                        </div>
+                    </div>
+                    <div class="row py-1">
+                        <div class="col">
+                            <label>Phone number:</label>
+                        </div>
+                        <div class="col">
+                            {{ user_obj.phone_number }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="p-3 border bg-light">
+                    <h5 class="fw-bold">Orders</h5>
+                    <div class="row py-1">
+                        <div class="col">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for order in user_orders %}
+                                    <tr>
+                                        <th scope="row">{{ order.id }}</th>
+                                        <td>{{ order.get_total }}</td>
+                                        <td>{{ order.status.title }}</td>
+                                        <td>{{ order.time_created }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, UpdateView
 from accounts.forms import CustomUserCreationForm, CustomUserChangeForm
+from cart.models import Order
 
 
 class UserCreateView(CreateView):
@@ -34,6 +35,14 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     def get_object(self, queryset=None):
         return self.request.user
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['user_orders'] = self.get_user_orders()
+        return context
+
+    def get_user_orders(self):
+        return Order.objects.filter(user=self.get_object())
+
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = get_user_model()
@@ -44,12 +53,12 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
     def get_success_url(self):
-        return reverse('accounts:profile', kwargs={'pk': self.object.pk})
+        return reverse('accounts:profile')
 
 
 class UserPasswordChangeView(PasswordChangeView):
     template_name = 'update_password.html'
 
     def get_success_url(self):
-        return reverse('accounts:profile', kwargs={'pk': self.request.user.pk})
+        return reverse('accounts:profile')
 

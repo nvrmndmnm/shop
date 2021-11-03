@@ -142,3 +142,12 @@ body {
     opacity: 0.8;
     cursor: pointer;
 }
+.form-error {
+    color: #ff3535;
+    margin: -10px 0 10px 60%;
+    font-size: 14px;
+}
+.field-error {
+    border: solid 1px #ff3535;
+    box-shadow: #ff3535 0 0 3px;
+}
