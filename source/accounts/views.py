@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model, login
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -26,15 +26,13 @@ class UserCreateView(CreateView):
         return next_url
 
 
-class UserDetailView(UserPassesTestMixin, DetailView):
+class UserDetailView(LoginRequiredMixin, DetailView):
     model = get_user_model()
     template_name = 'detail.html'
     context_object_name = 'user_obj'
-    permission_required = 'auth.view_user'
 
-    def test_func(self):
-        return self.request.user == self.get_object() or\
-               self.request.user.has_perm(self.permission_required)
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
