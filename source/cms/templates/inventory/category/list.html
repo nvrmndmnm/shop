@@ -14,7 +14,7 @@
     </ul>
     <div class="d-flex justify-content-between mt-4 mb-2">
         <a class="btn btn-warning btn-sm h-50" href="{% url 'cms:category_create' %}">Add category</a>
-        {% include "partial/search_form.html" %}
+        {% include "partial/search_form.html" with search_url='cms:search_category' %}
     </div>
     {% if category_list %}
         <table class="table table-hover">

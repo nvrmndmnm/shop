@@ -1,5 +1,6 @@
 import csv
 from io import StringIO
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
@@ -7,13 +8,19 @@ from django.views.generic import View, ListView, DetailView, UpdateView, CreateV
 
 from cms.forms import ProductForm, CategoryForm, BrandForm, ImageContainerForm, ImageForm, UploadFileForm
 from storefront.models import Product, Category, Brand, ImageContainer, Stock, PriceList
+from storefront.views import ProductSearchView
 
 
-class ProductListView(ListView):
-    model = Product
+class CMSProductSearchView(ProductSearchView):
     template_name = 'inventory/product/list.html'
     paginate_by = 10
-    ordering = ['time_created']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.search_value:
+            query = self.get_query()
+            queryset = queryset.filter(query)
+        return queryset
 
 
 class ProductCreateView(CreateView):
@@ -153,11 +160,15 @@ def update_stocks(csv_upload):
         product.save()
 
 
-class CategoryListView(ListView):
-    model = Category
+class CMSCategorySearchView(ProductSearchView):
     template_name = 'inventory/category/list.html'
-    paginate_by = 10
-    ordering = ['title']
+
+    def get_queryset(self):
+        queryset = Category.objects.all().order_by('title')
+        if self.search_value:
+            query = self.get_query()
+            queryset = queryset.filter(query)
+        return queryset
 
 
 class CategoryCreateView(CreateView):
@@ -186,11 +197,15 @@ class CategoryUpdateView(UpdateView):
         return reverse_lazy('cms:categories')
 
 
-class BrandListView(ListView):
-    model = Brand
+class CMSBrandSearchView(CMSProductSearchView):
     template_name = 'inventory/brand/list.html'
-    paginate_by = 10
-    ordering = ['title']
+
+    def get_queryset(self):
+        queryset = Brand.objects.all().order_by('title')
+        if self.search_value:
+            query = self.get_query()
+            queryset = queryset.filter(query)
+        return queryset
 
 
 class BrandCreateView(CreateView):

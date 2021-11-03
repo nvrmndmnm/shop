@@ -11,7 +11,7 @@ class ProductSearchView(ListView):
     model = Product
     template_name = 'product_list.html'
     ordering = ['-time_created']
-    paginate_by = 10
+    paginate_by = 12
 
     def get(self, request, *args, **kwargs):
         self.search_form = self.get_search_form()
