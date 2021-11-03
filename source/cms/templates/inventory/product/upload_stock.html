@@ -4,7 +4,12 @@
     <div class="w-50 mx-auto mt-4">
         <form action="{% url 'cms:price_upload' %}?next={{ next }}"
               method="post" class="text-center" enctype="multipart/form-data" novalidate>
-            {% include 'partial/form.html' with button_text='Upload' %}
+            {% include 'partial/form.html' with fields_only=True %}
+            <hr>
+            <div class="form-buttons d-flex justify-content-end">
+                <button class="btn btn-warning me-3" type="submit">Upload</button>
+                <a class="btn btn-dark" href="{{request.META.HTTP_REFERER}}">Back</a>
+            </div>
         </form>
     </div>
 {% endblock %}
