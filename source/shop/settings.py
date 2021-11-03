@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'accounts',
     'cms',
     'cart',
-    'django_sass'
+    'django_sass',
+    'django_countries'
 ]
 
 MIDDLEWARE = [
@@ -67,7 +68,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'storefront.processors.menu_processor'
+                'storefront.processors.menu_processor',
+                'storefront.processors.cart_items'
             ],
         },
     },
