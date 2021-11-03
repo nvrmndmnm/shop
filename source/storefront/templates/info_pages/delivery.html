@@ -1,6 +1,54 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Delivery{% endblock %}
+{% block title %}Shipping and delivery{% endblock %}
 {% block content %}
-    Delivery
+    <div class="container pt-4">
+        <div class="content">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb p-3">
+                    <li class="breadcrumb-item"><a href="{% url 'storefront:index' %}">Shop</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'storefront:delivery' %}">Shipping and returns</a></li>
+                </ol>
+            </nav>
+            <div class="px-5 py-3">
+                <h2 class="mb-4">Shipping policy</h2>
+                <p>Shipping costs may differ depending on your delivery address. There is a shipping calculator at
+                    the checkout page, please use it if you want to check the exact shipping costs for your order.</p>
+                <p>We ship all orders within five days of receiving the order, often on the very same day.</p>
+                <p>We use a variety of carriers for our shipments. You may have the option to select a preferred one
+                    at checkout. However, we may end up using a different carrier than the one you have selected if the
+                    carrier your selected is not available or applicable for delivery to your address. If for some
+                    reason we cannot accommodate your choice of shipping carrier, we do reserve the right to use a
+                    different carrier than the one you selected, with the same or better delivery service and same
+                    or lower cost to you.</p>
+                <p>Shipping costs may differ depending on your delivery address. There is a shipping calculator at the
+                    checkout page, please use it if you want to check the exact shipping costs for your order. These
+                    costs may change based on your location and the nature of your order. Depending on your location,
+                    it is possible that your order may incur additional delivery costs like duties, excise or import
+                    fees imposed by your customs office.</p>
+
+                <h2 class="my-4">When To Expect Your Order</h2>
+                <p>Once we receive the order, we process it within hours. Provided that all items from your order
+                    are in stock, we (or your local distributor) will ship the order within 1 to 5 days, often on the
+                    very same day. Please note that it is possible that some locations we ship from may have restrictions
+                    — for example shipping Monday to Wednesday only.</p>
+                <p>Once your order is processed and shipped, you will receive an email confirming the shipment,
+                    including a tracking number if available and if you opted for one at checkout.</p>
+                <p>Your order status is available at any time in your Order History page in your online account with us.</p>
+
+                <h2 class="my-4">Delivery</h2>
+                <p>FP-Mart is able to ship orders anywhere in the world. Of course, there might be some restrictions
+                    shipping to some destinations.</p>
+                <p>If your order is shipped to a destination outside the EU or EEA, the recipient may be charged
+                    duties and taxes upon delivery of the order.  Duties and taxes are determined by the authorities
+                    in the country to which the order is being shipped to. We have no control or prior knowledge of
+                    these fees. Please contact your customs office for further inquiries.</p>
+                <p>All non-EU destinations should expect their order to go through customs and be required to pay
+                    import duties and or fees. Since Brexit, this is also the case for all orders from the UK.</p>
+                <p>By placing such an order you are agreeing to pay any duties and taxes that may be applicable upon
+                    import into your country. By placing you order with us you agree that you have read and are fully
+                    aware of all additional delivery charges that you may incur because of your shipping destination.</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

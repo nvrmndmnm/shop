@@ -1,6 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Benefits{% endblock %}
+{% block title %}Return policy{% endblock %}
 {% block content %}
-    Benefits
+    <div class="container pt-4">
+        <div class="content">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb p-3">
+                    <li class="breadcrumb-item"><a href="{% url 'storefront:index' %}">Shop</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'storefront:returns' %}">Return policy</a></li>
+                </ol>
+            </nav>
+            <div class="px-5 py-3">
+                <h2 class="mb-4">Return policy</h2>
+                <p>IMPORTANT: Due to the developing COVID-19 situation we cannot accept returns of any food items.
+                    This limitation supersedes all other shipping and return policies we’ve previously had until further notice.</p>
+                <p>Our products come with a 100% satisfaction guarantee promise. If you are not satisfied in any way
+                    by your purchase, please let us know and we will work with you to make things right.</p>
+                <p>If you decide not to use the products you purchased, it is often possible to return them to us for
+                    a refund. This is considered on a case-by-case and is fully at the discretion of our management.
+                    If we accept a full return, then a full refund of the purchase price, excluding shipping costs,
+                    both for delivery and return of the merchandise, where applicable, will be issued upon receiving
+                    the merchandise in the same condition in which it was shipped, provided that it is before its
+                    expiration date. In some cases we may be able to refund the shipping costs as well.</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

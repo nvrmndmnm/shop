@@ -21,6 +21,11 @@
         <div class="header-controls d-flex">
             <a class="btn btn-warning text-black me-2" href="{% url 'cms:cms' %}">Orders</a>
             <a class="btn btn-warning text-black me-2" href="{% url 'cms:products' %}">Inventory</a>
+            {% if  user.is_authenticated %}
+                <a class="pt-1 ms-2" href="{% url 'accounts:logout' %}">
+                    <i class="fa fa-sign-out fa-2x"></i>
+                </a>
+            {% endif %}
         </div>
     </div>
 </nav>
