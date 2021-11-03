@@ -2,5 +2,37 @@
 {% load static %}
 {% block title %}Benefits{% endblock %}
 {% block content %}
-    Benefits
+    <div class="container pt-4">
+        <div class="content">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb p-3">
+                    <li class="breadcrumb-item"><a href="{% url 'storefront:index' %}">Shop</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'storefront:benefits' %}">Benefits</a></li>
+                </ol>
+            </nav>
+            <div class="px-5 py-3">
+                <h2 class="mb-4">Worry-Free Purchase</h2>
+                <p>Our products come with a 100% no-questions asked money-back guarantee. Try them and if you don’t
+                    like them for any reason or decide that they are not for you, we will refund your money — no
+                    questions asked. We will even take on the credit card fees. No other products’ warranty comes
+                    close to this.</p>
+
+                <h2 class="my-4">Worry-Free Delivery</h2>
+                <p>Our products are delivered well-packaged during transportation. If some of them are perishable
+                    and we think that they will not be able to make it to you, we will let you know. We will never
+                    ship anything in a way that it will jeopardize it being consumed. So if you worry about ordering
+                    online because those products can get spoiled on their way to you — don’t. There is nothing to
+                    worry about. We ship to any part of the world where there are no shipping restrictions and it
+                    usually takes days for your package to reach you. Of course it may take longer for more demote
+                    locations.</p>
+
+                <h2 class="my-4">Get FREE Stuff</h2>
+                <p>You gotta love this one! We really try our best to make your shopping experience enjoyable.
+                    That is why we try to give you as much as we can in return to your shopping with us.
+                    We, for example, add a e-copy of our Classic Bulgarian Recipes cookbook, on us, with your purchase.
+                    That’s a $29 book yours to keep for FREE! We also periodically send you notices about discounts and
+                    promotions that are going on at our site. We know you love a bargain so we try to make you happy!</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
