@@ -84,7 +84,7 @@
                                 <div class="carousel-item">
                             {% endif %}
                         <div class="col-md-3 h-100 px-3 py-1" style="float:left">
-                            <div class="card mb-2 product-card" onclick="location.href='{% url "storefront:product" product.pk %}';">
+                            <div class="card mb-2 product-card" id="#card" onclick="location.href='{% url "storefront:product" product.pk %}';">
                                 <img class="card-img-top product-img-preview pt-2"
                                      src="{{ product.image_container.images.first.file.url }}" alt="{{ product.title }}">
                                 <div class="card-body">
@@ -92,13 +92,16 @@
                                     <div class="d-flex align-items-center">
                                         <h5 class="pro-price w-50">
                                             {% if product.stock.discount_price %}
-                                                <strike class="text-muted">${{ product.stock.price }}</strike>
+                                                <span class="text-muted text-decoration-line-through">${{ product.stock.price }}</span>
                                                 <span class="discount">${{ product.stock.discount_price }}</span>
                                             {% else %}
                                                 <span class="text-muted">${{ product.stock.price }}</span>
                                             {% endif %}
                                         </h5>
-                                        <a class="nav-link w-25" href="ppp"><i class="fa fa-shopping-cart fa-2x"></i></a>
+                                        <a class="nav-link w-25" id="add_to_cart_{{ product.pk }}"
+                                           onclick="addToCart({{ product.pk }}, '{% url 'cart:add_to_cart' product.pk %}')">
+                                            <i class="fa fa-shopping-cart fa-2x"></i>
+                                        </a>
                                         <a class="nav-link w-25" href="ooo"><i class="fa fa-heart fa-2x"></i></a>
                                     </div>
                                 </div>
@@ -135,14 +138,14 @@
                                         <div class="d-flex align-items-center">
                                             <h5 class="pro-price w-50">
                                                 {% if product.stock.discount_price %}
-                                                    <strike class="text-muted">${{ product.stock.price }}</strike>
+                                                    <span class="text-muted text-decoration-line-through">${{ product.stock.price }}</span>
                                                     <span class="discount">${{ product.stock.discount_price }}</span>
                                                 {% else %}
                                                     <span class="text-muted">${{ product.stock.price }}</span>
                                                 {% endif %}
                                             </h5>
-                                            <a class="nav-link w-25" href="{% url 'cart:add_to_cart' %}"><i class="fa fa-shopping-cart fa-2x"></i></a>
-                                            <a class="nav-link w-25" href="ooo"><i class="fa fa-heart fa-2x"></i></a>
+                                            <a class="nav-link w-25" href="{% url 'cart:add_to_cart' product.pk %}"><i class="fa fa-shopping-cart fa-2x"></i></a>
+                                            <a class="nav-link w-25" href="{% url 'cart:remove_from_cart' product.pk %}"><i class="fa fa-heart fa-2x"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -156,4 +159,15 @@
                     </div>
                 </div>
             </div>
+            <script>
+                function addToCart(id, url){
+                    $.get(url);if (!e) var e = window.event;
+                    e.cancelBubble = true;
+                    if (e.stopPropagation) e.stopPropagation();
+                    $("#add_to_cart_" + id).find($(".fa")).toggleClass('fa-shopping-cart fa-check');
+                    setTimeout(() => {
+                        $("#add_to_cart_" + id).find($(".fa")).toggleClass('fa-check fa-shopping-cart');
+                    }, 1500);
+                }
+            </script>
 {% endblock %}

@@ -27,13 +27,13 @@
                                     <div class="d-flex align-items-center">
                                         <h5 class="pro-price w-50">
                                             {% if product.stock.discount_price %}
-                                                <strike class="text-muted">${{ product.stock.price }}</strike>
+                                                <span class="text-muted text-decoration-line-through">${{ product.stock.price }}</span>
                                                 <span class="discount">${{ product.stock.discount_price }}</span>
                                             {% else %}
                                                 <span class="text-muted">${{ product.stock.price }}</span>
                                             {% endif %}
                                         </h5>
-                                        <a class="nav-link w-25" href="ppp"><i class="fa fa-shopping-cart fa-2x"></i></a>
+                                        <a class="nav-link w-25" href="{% url 'cart:add_to_cart' product.pk %}"><i class="fa fa-shopping-cart fa-2x"></i></a>
                                         <a class="nav-link w-25" href="ooo"><i class="fa fa-heart fa-2x"></i></a>
                                     </div>
                                 </div>
