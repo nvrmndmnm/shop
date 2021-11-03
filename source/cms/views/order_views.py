@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
+from django.utils.datetime_safe import datetime
 from django.views.generic import ListView, DetailView
 
 from cart.models import Order
@@ -47,6 +48,7 @@ def order_processed(request, **kwargs):
 def order_delivered(request, **kwargs):
     order = get_object_or_404(Order, pk=kwargs.get("pk"))
     order.status = 'FINISHED'
+    order.finished_date = datetime.now()
     order.save()
     return redirect('cms:orders_new')
 
