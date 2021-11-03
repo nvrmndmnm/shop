@@ -21,7 +21,7 @@
                     {% if order %}
                         <div class="col-md-7 me-5">
                             <h5 class="text-uppercase mb-4">Billing details</h5>
-                            <form id="checkout" method="post" action="{% url 'cart:checkout' %}" novalidate>
+                            <form id="checkout" class="checkout-form" method="post" action="{% url 'cart:checkout' %}" novalidate>
                                 {% include 'partial/form.html' with fields_only=True %}
                             </form>
                         </div>
