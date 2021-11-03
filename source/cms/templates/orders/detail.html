@@ -136,13 +136,13 @@
     <div class="row my-4">
         <div class="col d-flex justify-content-end">
             {% if order.status == 'PROCESSING' %}
-                <button class="btn btn-warning px-5 me-3">Accept</button>
-                <button class="btn btn-dark px-5">Cancel order</button>
+                <a class="btn btn-warning px-5 me-3" href="{% url 'cms:order_processed' order.pk %}">Accept</a>
+                <a class="btn btn-dark px-5" href="{% url 'cms:order_canceled' order.pk %}">Cancel order</a>
             {% elif order.status == 'ON_DELIVERY' %}
-                <button class="btn btn-warning px-5 me-3">Delivered</button>
-                <button class="btn btn-dark px-5">Cancel order</button>
+                <a class="btn btn-warning px-5 me-3" href="{% url 'cms:order_delivered' order.pk %}">Delivered</a>
+                <a class="btn btn-dark px-5" href="{% url 'cms:order_canceled' order.pk %}">Cancel order</a>
             {% elif order.status == 'FINISHED' %}
-                <button class="btn btn-light px-5 me-3">Refund</button>
+                <a class="btn btn-light px-5 me-3" href="{% url 'cms:order_returned' order.pk %}">Refund</a>
             {% endif %}
         </div>
     </div>

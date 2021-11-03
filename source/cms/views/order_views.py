@@ -36,8 +36,32 @@ class OrderDetailView(PermissionRequiredMixin, DetailView):
 
 
 @permission_required(perm='employee', login_url='accounts:login')
-def process_order(request, **kwargs):
+def order_processed(request, **kwargs):
     order = get_object_or_404(Order, pk=kwargs.get("pk"))
     order.status = 'ON_DELIVERY'
+    order.save()
+    return redirect('cms:orders_new')
+
+
+@permission_required(perm='employee', login_url='accounts:login')
+def order_delivered(request, **kwargs):
+    order = get_object_or_404(Order, pk=kwargs.get("pk"))
+    order.status = 'FINISHED'
+    order.save()
+    return redirect('cms:orders_new')
+
+
+@permission_required(perm='employee', login_url='accounts:login')
+def order_canceled(request, **kwargs):
+    order = get_object_or_404(Order, pk=kwargs.get("pk"))
+    order.status = 'CANCELED'
+    order.save()
+    return redirect('cms:orders_new')
+
+
+@permission_required(perm='employee', login_url='accounts:login')
+def order_returned(request, **kwargs):
+    order = get_object_or_404(Order, pk=kwargs.get("pk"))
+    order.status = 'RETURNED'
     order.save()
     return redirect('cms:orders_new')
