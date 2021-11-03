@@ -38,7 +38,7 @@
                                 <strong>Price: </strong>
                                 {% if product.stock.discount_price %}
                                     <span class="pro-price discount">
-                                        <strike class="text-muted">${{ product.stock.price }}</strike>
+                                        <span class="text-muted text-decoration-line-through">${{ product.stock.price }}</span>
                                         ${{ product.stock.discount_price }}</span>
                                 {% else %}
                                     <span class="pro-price text-muted">${{ product.stock.price }}</span>
@@ -48,11 +48,12 @@
                         </div>
                         {% if product.stock.quantity > 0 %}
                             <div class="form-group mt-3">
-                                <form>
+                                <form action="{% url 'cart:add_to_cart' product.pk %}" method="post">
+                                    {% csrf_token %}
                                     <label for="quantity" class="fw-bold">Quantity:</label>
-                                    <input id="quantity" type="number" min="0" max="{{ product.stock.quantity }}"
+                                    <input id="quantity" name="quantity" type="number" min="1" max="{{ product.stock.quantity }}"
                                            placeholder="1" class="form-control quantity mt-1">
-                                    <button class="btn btn-round btn-main mt-3" type="button">
+                                    <button class="btn btn-round btn-main mt-3" type="submit">
                                         <i class="fa fa-shopping-cart"></i> Add to Cart
                                     </button>
                                 </form>
