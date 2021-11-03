@@ -79,7 +79,7 @@ class ImageContainer(BaseModel):
 
 class Image(BaseModel):
     code = models.CharField(max_length=255)
-    file = models.ImageField(upload_to='product_images', verbose_name='Product image')
+    file = models.ImageField(upload_to='product_images', blank=True, null=True, verbose_name='Product image')
 
     def __str__(self):
         return f"{self.id} - {self.code}"
