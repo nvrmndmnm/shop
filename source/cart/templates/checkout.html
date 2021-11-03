@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+    <div class="container pt-4">
+        <div class="content">
+            <div class="row mt-5">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb p-3 justify-content-center">
+                        <li class="breadcrumb-item">
+                            <a class="h3 text-uppercase text-muted text-decoration-none" href="{% url 'cart:cart_summary' %}">Shopping cart</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            <a class="h3 text-uppercase text-dark text-decoration-none" href="{% url 'cart:checkout' %}">Checkout details</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <span class="h3 text-uppercase text-muted">Order complete</span>
+                        </li>
+                    </ol>
+                </nav>
+                <div class="d-flex col-md-12 px-5 my-4 justify-content-between">
+                    {% if order %}
+                        <div class="col-md-7 me-5">
+                            <h5 class="text-uppercase mb-4">Billing details</h5>
+                            <form id="checkout" method="post" action="{% url 'cart:checkout' %}" novalidate>
+                                {% include 'partial/form.html' with fields_only=True %}
+                            </form>
+                        </div>
+                        <div class="col-md-4 d-flex flex-column">
+                            <h5 class="text-uppercase mb-4">Your order</h5>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Product</th>
+                                    <th scope="col" class="text-end">Subtotal</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for order_item in order.items.all %}
+                                    <tr>
+                                        <td>{{ order_item.item.title }}<span class="text-muted fw-bold"> x {{ order_item.quantity }}</span></td>
+                                        <td class="text-end">${{ order_item.get_subtotal }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th scope="row">Subtotal</th>
+                                    <td class="text-end">${{ order.get_subtotal }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Shipping</th>
+                                    <td class="text-end">${{ order.get_shipping }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Total</th>
+                                    <td class="text-end">${{ order.get_total }}</td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                            <button class="btn btn-main" type="submit" form="checkout">Place order</button>
+                        </div>
+                    {% else %}
+                        <div class="col-12 text-center">
+                            <h3 class="text-uppercase">Your cart is empty</h3>
+                            <a href="{% url 'storefront:index' %}">Continue shopping</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% include 'partial/benefits_block.html' %}
+        </div>
+    </div>
+{% endblock %}
