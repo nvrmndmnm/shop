@@ -16,7 +16,7 @@ class CMSProductSearchView(ProductSearchView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = Product.objects.all().order_by('-time_created')
         if self.search_value:
             query = self.get_query()
             queryset = queryset.filter(query)
@@ -41,6 +41,7 @@ class ProductCreateView(CreateView):
         return ImageForm(**form_kwargs)
 
     def post(self, request, *args, **kwargs):
+        self.object = None
         form = self.get_form()
         image_form = self.get_image_form()
         if form.is_valid() and image_form.is_valid():
@@ -52,6 +53,8 @@ class ProductCreateView(CreateView):
         product = form.save(commit=False)
         product.image_container = ImageContainer.objects.create(title=product.sku)
         image = image_form.save()
+        image.code = image.filename()
+        image.save()
         product.image_container.images.add(image)
         product.save()
         return redirect(self.get_success_url())
@@ -77,6 +80,7 @@ class ProductUpdateView(UpdateView):
         return super().get_context_data(**kwargs)
 
     def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
         form = self.get_form()
         image_container_form = self.get_image_container_form()
         image_form = self.get_image_form()
