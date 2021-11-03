@@ -1,4 +1,4 @@
-#E-shop built with Django
+# E-shop built with Django
 A simple e-shop with catalog, user accounts, cart and content management system.
 Created as a course work exercise by Seydou Obedias.
 
