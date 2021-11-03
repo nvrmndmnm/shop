@@ -16,7 +16,7 @@
         </li>
     </ul>
     <div class="d-flex justify-content-end mt-4 mb-2">
-        {% include "partial/search_form.html" %}
+        {% include "partial/search_form.html" with search_url='storefront:search' %}
     </div>
     {% if order_list %}
         <table class="table table-hover">
