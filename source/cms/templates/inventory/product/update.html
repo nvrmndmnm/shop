@@ -2,17 +2,17 @@
 {% block title %}Product {{ product.title }} - CMS{% endblock %}
 {% block content %}
     <div class="w-50 mx-auto mt-4">
-        <form action="{% url 'cms:product_update' product.pk %}?next={{ next }}"
+        <form class="cms-form" action="{% url 'cms:product_update' product.pk %}?next={{ next }}"
               method="post" class="text-center" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
             {% include 'partial/form.html' with fields_only=True %}
+            {% include 'partial/form.html' with fields_only=True form=image_container_form %}
+            {% include 'partial/form.html' with fields_only=True form=image_form %}
             <hr>
             <div class="form-buttons d-flex justify-content-end">
                 <button class="btn btn-warning me-3" type="submit">Update</button>
                 <a class="btn btn-dark" href="{{request.META.HTTP_REFERER}}">Back</a>
             </div>
-            {{ image_container_form.as_p }}
-            {{ image_form.as_p }}
         </form>
     </div>
 {% endblock %}
