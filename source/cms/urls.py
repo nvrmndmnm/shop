@@ -8,6 +8,7 @@ urlpatterns = [
     path('orders/new/', cms_views.NewOrderListView.as_view(), name='orders_new'),
     path('orders/processed/', cms_views.ProcessedOrderListView.as_view(), name='orders_processed'),
     path('orders/archive/', cms_views.ArchivedOrderListView.as_view(), name='orders_archived'),
+    path('orders/search/', cms_views.OrderSearchView.as_view(), name='search_order'),
     path('orders/<int:pk>', cms_views.OrderDetailView.as_view(), name='order'),
     path('orders/<int:pk>/process/', cms_views.order_processed, name='order_processed'),
     path('orders/<int:pk>/delivered/', cms_views.order_delivered, name='order_delivered'),

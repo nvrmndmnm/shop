@@ -1,10 +1,30 @@
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.datetime_safe import datetime
 from django.views.generic import ListView, DetailView
 
 from cart.models import Order
+from storefront.views import ProductSearchView
+
+
+class OrderSearchView(PermissionRequiredMixin, ProductSearchView):
+    template_name = 'orders/list.html'
+    paginate_by = 10
+    permission_required = 'employee'
+    login_url = 'accounts:login'
+
+    def get_queryset(self):
+        queryset = Order.objects.all().order_by('time_created')
+        if self.search_value:
+            query = self.get_query()
+            queryset = queryset.filter(query)
+        return queryset
+
+    def get_query(self):
+        query = Q(id__icontains=self.search_value)
+        return query
 
 
 class NewOrderListView(PermissionRequiredMixin, ListView):

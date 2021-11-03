@@ -14,9 +14,14 @@
             <a class="nav-link {% if 'orders/archive' in request.path %}active{% endif %}"
                href="{% url 'cms:orders_archived' %}">Archive</a>
         </li>
+        {% if '/orders/search/' in request.path %}
+            <li class="nav-item">
+                <a class="nav-link active">Search results</a>
+            </li>
+        {% endif %}
     </ul>
     <div class="d-flex justify-content-end mt-4 mb-2">
-        {% include "partial/search_form.html" with search_url='storefront:search' %}
+        {% include "partial/search_form.html" with search_url='cms:search_order' %}
     </div>
     {% if order_list %}
         <table class="table table-hover">
@@ -26,7 +31,7 @@
                 <th scope="col" style="width: 20%">Customer Name</th>
                 <th scope="col" style="width: 20%">Phone Number</th>
                 <th scope="col" style="width: 6%">Total</th>
-                <th scope="col" style="width: 8%">Actions</th>
+                <th scope="col" style="width: 8%">Status</th>
             </tr>
             </thead>
             <tbody>
