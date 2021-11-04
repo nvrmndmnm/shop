@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -7,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import View
-from django.views.generic import DetailView, FormView, CreateView
+from django.views.generic import DetailView, CreateView
 from cart.forms import AddressForm, OrderItemQuantityForm
 from storefront.models import Product
 from cart.models import Order, OrderItem, Address
@@ -76,41 +75,6 @@ class CheckoutView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('cart:order_complete')
 
-# class CheckoutView(LoginRequiredMixin, FormView):
-#     template_name = 'checkout.html'
-#     form_class = AddressForm
-#
-#     def dispatch(self, request, *args, **kwargs):
-#         if self.request.user.is_authenticated:
-#             self.order = self.get_order()
-#         return super().dispatch(request, *args, **kwargs)
-#
-#     def post(self, request, *args, **kwargs):
-#         self.form = self.get_form()
-#         if self.form.is_valid():
-#             print('tes')
-#         else:
-#             return reverse('cart:checkout')
-#
-#     def get_order(self):
-#         try:
-#             return Order.objects.filter(user=self.request.user, status='NEW', items__isnull=False).first()
-#         except ObjectDoesNotExist:
-#             return None
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['order'] = self.order
-#         return context
-#
-#     def form_valid(self, form):
-#         print(form)
-#         self.address = form.save()
-#         return super().form_valid(form)
-#
-#     def get_success_url(self):
-#         return reverse('cart:order_complete')
-
 
 class OrderCompleteView(LoginRequiredMixin, View):
     def get(self, request):
@@ -135,14 +99,11 @@ def add_to_cart(request, **kwargs):
         if order.items.filter(item__pk=item.pk).exists():
             order_item.quantity += quantity
             order_item.save()
-            # messages.info(request, 'Another product added.')
         else:
-            # messages.info(request, 'Product added to your cart.')
             order.items.add(order_item)
     else:
         order = Order.objects.create(user=request.user, status='NEW')
         order.items.add(order_item)
-        # messages.info(request, 'Product added to your cart.')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
@@ -157,12 +118,9 @@ def remove_from_cart(request, **kwargs):
             order_item.quantity = 1
             order_item.save()
             order.items.remove(order_item)
-            # messages.info(request, 'Product removed from your cart.')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
         else:
-            # messages.info(request, 'Product was not in the cart.')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
     else:
-        # messages.info(request, 'You do not have an order.')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
